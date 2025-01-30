@@ -72,7 +72,7 @@ Este é um **desafio** focado em microserviços, onde o objetivo principal é a 
 
 - **h2**: Banco de dados em memória utilizado para testes e desenvolvimento. Oferece uma solução rápida e fácil de configurar, sem necessidade de um banco de dados externo.
 
- **spring-cloud-starter-openfeign**: Integração com **Spring Cloud** para usar o **Feign** em microserviços, facilitando a comunicação entre sistemas distribuídos. Inclui a configuração necessária para o uso do Feign no contexto de microserviços na nuvem.
+- **spring-cloud-starter-openfeign**: Integração com **Spring Cloud** para usar o **Feign** em microserviços, facilitando a comunicação entre sistemas distribuídos. Inclui a configuração necessária para o uso do Feign no contexto de microserviços na nuvem.
 
 - **mysql-connector-j**: Driver JDBC necessário para conectar o Spring Boot a um banco de dados **MySQL**. Essencial para a operação do banco de dados em ambiente de produção.
 
