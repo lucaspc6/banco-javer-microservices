@@ -17,35 +17,6 @@ Este é um **desafio** focado em microserviços, onde o objetivo principal é a 
 
 ---
 
-## Regras de Negócio 📊
-
-### 1. Cadastro de Conta
-- Campos obrigatórios: **nome**, **telefone**, **saldo inicial**, e **correntista**.
-- Campos gerenciados automaticamente: **ID** e **score_credito**.
-
-### 2. Ativação de Conta Corrente
-- A conta pode ser marcada como **corrente** posteriormente, caso não tenha sido no momento da criação.
-
-### 3. Validação de Saldo Positivo
-- O saldo da conta **nunca pode ser negativo** e deve ser **igual ou maior que zero**.
-
-### 4. Cálculo Automático de Score
-- O sistema calcula automaticamente o **score_credito** com a fórmula: `score_credito = saldo_cc * 0.1`.
-
-### 5. Unicidade de Campos
-- O **telefone** e **ID** de cada cliente devem ser únicos em todo o sistema.
-
-### 6. Desativação de Conta
-- A conta corrente só pode ser desativada (correntista = false) **se o saldo for zero**.
-
-### 7. Exclusão de Conta
-- A conta só pode ser excluída **se a opção de conta corrente estiver desativada** (correntista = false).
-
-### 8. Validação de Campos Obrigatórios
-- Durante a criação ou atualização da conta, todos os campos obrigatórios devem ser validados pelo sistema.
-
----
-
 ## Tecnologias Utilizadas 🛠️
 
 ### Backend
@@ -84,8 +55,34 @@ Este é um **desafio** focado em microserviços, onde o objetivo principal é a 
 
 - **modelmapper**: Ferramenta para **mapeamento de objetos**, permitindo transformar objetos de diferentes camadas de aplicação (por exemplo, DTOs e entidades) de forma simples e eficiente.
 
-
 ---
+
+## Regras de Negócio 📊
+
+### 1. Cadastro de Conta
+- Campos obrigatórios: **nome**, **telefone**, **saldo inicial**, e **correntista**.
+- Campos gerenciados automaticamente: **ID** e **score_credito**.
+
+### 2. Ativação de Conta Corrente
+- A conta pode ser marcada como **corrente** posteriormente, caso não tenha sido no momento da criação.
+
+### 3. Validação de Saldo Positivo
+- O saldo da conta **nunca pode ser negativo** e deve ser **igual ou maior que zero**.
+
+### 4. Cálculo Automático de Score
+- O sistema calcula automaticamente o **score_credito** com a fórmula: `score_credito = saldo_cc * 0.1`.
+
+### 5. Unicidade de Campos
+- O **telefone** e **ID** de cada cliente devem ser únicos em todo o sistema.
+
+### 6. Desativação de Conta
+- A conta corrente só pode ser desativada (correntista = false) **se o saldo for zero**.
+
+### 7. Exclusão de Conta
+- A conta só pode ser excluída **se a opção de conta corrente estiver desativada** (correntista = false).
+
+### 8. Validação de Campos Obrigatórios
+- Durante a criação ou atualização da conta, todos os campos obrigatórios devem ser validados pelo sistema.
 
 ## Funcionalidades Principais 🎯
 
@@ -108,6 +105,7 @@ Este é um **desafio** focado em microserviços, onde o objetivo principal é a 
    - A conta pode ser excluída apenas se a opção de conta corrente estiver previamente desativada.
 
 ---
+
 ## Pré-Requisitos
 - **Java 21**: É recomendado utilizar o **Java 21** para executar o projeto. Certifique-se de que o JDK 21 esteja instalado e configurado corretamente no seu sistema.
 - **IDE de Preferência**: Utilize uma IDE que dê suporte a projetos Maven, como IntelliJ IDEA, Eclipse ou VS Code. 
