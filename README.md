@@ -108,11 +108,17 @@ Este é um **desafio** focado em microserviços, onde o objetivo principal é a 
    - A conta pode ser excluída apenas se a opção de conta corrente estiver previamente desativada.
 
 ---
+## Pré-Requisitos
+- **Java 21**: É recomendado utilizar o **Java 21** para executar o projeto. Certifique-se de que o JDK 21 esteja instalado e configurado corretamente no seu sistema.
+- **IDE de Preferência**: Utilize uma IDE que dê suporte a projetos Maven, como IntelliJ IDEA, Eclipse ou VS Code. 
+  - Certifique-se de que o plugin do Maven esteja instalado e habilitado na sua IDE.
 
 ## Como Executar o Projeto ⚙️
-
-### Pré-requisitos
-Antes de rodar o projeto, certifique-se de ter os seguintes itens instalados:
-
-- **Java 17 ou superior**
-
+- Clone o projeto utilizando o comando: **git clone https://github.com/lucaspc6/banco-javer-microservices.git**
+- Após clonar o repositório, entre no diretório do projeto: **cd banco-javer-microservices**
+- Abra o projeto na sua IDE: Importe o projeto na sua IDE preferida (por exemplo, IntelliJ IDEA, Eclipse ou VS Code). Certifique-se de que o projeto tenha o suporte do Maven configurado corretamente.
+- Execute as aplicações: Após abrir o projeto na IDE, localize a classe principal do Spring Boot (geralmente com a anotação @SpringBootApplication) e execute-a como uma aplicação Java. Normalmente, basta clicar com o botão direito do mouse sobre a classe principal e selecionar a opção "Run" ou "Executar".
+- Abra o console do banco de dados H2 acessando a URL: **http://localhost:9993/h2-console**
+- Faça login utilizando as credenciais do banco de dados configuradas no projeto.
+- Você pode visualizar a documentação da API da primeira aplicação clicando no link abaixo: **http://localhost:9993/swagger-ui/index.html**
+- A documentação da segunda aplicação pode ser acessada pelo mesmo link: **http://localhost:9994/swagger-ui/index.html**
