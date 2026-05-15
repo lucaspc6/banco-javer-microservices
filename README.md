@@ -1,122 +1,229 @@
-# Banco Javer - Microservices 🚀
+# Spring Boot Bank Customer Microservices
 
-Bem-vindo ao **Banco Javer**! Aqui você encontrará a base de código para um sistema de microserviços desenvolvido com **Spring Boot**, focado no **cadastro de clientes bancários**. Este projeto é uma demonstração completa da criação e integração de microserviços, com o objetivo de gerenciar contas bancárias de clientes de maneira eficiente e escalável. Prepare-se para entender como conectar múltiplos microserviços e construir uma arquitetura sólida!
+Spring Boot Bank Customer Microservices is a Java-based microservices project focused on customer registration in a banking domain.
 
----
-
-## O Projeto
-
-Este repositório contém o desenvolvimento de um **sistema bancário** utilizando **microserviços** que operam de forma interconectada. O Banco Javer é uma aplicação de cadastro de clientes com funcionalidades robustas para a gestão de contas bancárias, como criação, atualização, exclusão e cálculo de **score de crédito**.
-
-A aplicação é dividida em duas partes:
-
-1. **Primeira Aplicação**: Atua como intermediária, expondo endpoints REST para realizar operações CRUD (Create, Read, Update, Delete) e calcular o score de crédito (com base no saldo da conta).
-2. **Segunda Aplicação**: Responsável pela persistência dos dados em uma base de dados H2, gerenciando as informações dos clientes.
-
-Este é um **desafio** focado em microserviços, onde o objetivo principal é a **integração de sistemas** e a **robustez dos testes**, garantindo que as funcionalidades sejam confiáveis e atendam às regras de negócio.
+The repository is structured around separate services for handling customer-related operations and storage responsibilities, following a microservices-oriented organization.
 
 ---
 
-## Tecnologias Utilizadas 🛠️
+## Overview
 
-### Backend
-- **Java 21**: Linguagem principal para o desenvolvimento dos microserviços.
-- **Spring Boot**: Framework para criação dos microserviços e exposição dos endpoints REST.
-- **Spring Data JPA**: Para interação com o banco de dados.
-- **Spring Cloud**: Para gerenciar a configuração e descoberta de serviços.
-- **H2**: Banco de dados local em memória utilizado na segunda aplicação para armazenar dados de forma leve durante o desenvolvimento.
+This project implements a microservices-based backend structure for Banco JAVER, focused on customer registration.
 
-### Testes
-- **JUnit 5**: Framework para testes unitários e integração.
-- **HttpTestClient (Spring)**: Usado para garantir a cobertura de 100% nos testes de endpoints.
+The repository is organized into separate service directories, allowing the application responsibilities to be divided across independent components.
 
-### Dependências
-- **spring-boot-starter-data-jpa**: Proporciona integração com **JPA (Java Persistence API)** para realizar operações de persistência no banco de dados de maneira eficiente e simples.
-  
-- **spring-boot-starter-validation**: Facilita a validação de dados em objetos Java usando as anotações da especificação **Bean Validation** (JSR 303/JSR 380).
+The visible project structure includes:
 
-- **spring-boot-starter-web**: Fornece suporte para criar serviços RESTful com **Spring MVC** e **Jackson** para serialização de JSON, permitindo a comunicação entre microserviços.
+- `clienteAPI`
+- `ClienteStorage`
 
-- **springdoc-openapi-starter-webmvc-ui**: Adiciona suporte ao **OpenAPI 3.0** para gerar e exibir a documentação da API de forma interativa utilizando **Swagger UI**.
-
-- **spring-boot-devtools**: Ferramentas de desenvolvimento para facilitar o ciclo de vida de desenvolvimento, como reinicialização automática e configuração rápida.
-
-- **h2**: Banco de dados em memória utilizado para testes e desenvolvimento. Oferece uma solução rápida e fácil de configurar, sem necessidade de um banco de dados externo.
-
-- **spring-cloud-starter-openfeign**: Integração com **Spring Cloud** para usar o **Feign** em microserviços, facilitando a comunicação entre sistemas distribuídos. Inclui a configuração necessária para o uso do Feign no contexto de microserviços na nuvem.
-
-- **mysql-connector-j**: Driver JDBC necessário para conectar o Spring Boot a um banco de dados **MySQL**. Essencial para a operação do banco de dados em ambiente de produção.
-
-- **lombok**: Biblioteca que simplifica o código, eliminando a necessidade de escrever métodos repetitivos como getters, setters, construtores e equals/hashCode.
-
-- **spring-boot-starter-webflux**: Proporciona o suporte a **programação reativa** usando **Spring WebFlux**, permitindo a criação de APIs reativas e escaláveis.
-
-- **spring-boot-starter-test**: Pacote para realizar testes automatizados com **JUnit** e **Mockito**, garantindo a qualidade e robustez das implementações.
-
-- **modelmapper**: Ferramenta para **mapeamento de objetos**, permitindo transformar objetos de diferentes camadas de aplicação (por exemplo, DTOs e entidades) de forma simples e eficiente.
+This separation suggests a backend design where customer-facing API operations and customer storage responsibilities are handled in different services.
 
 ---
 
-## Regras de Negócio 📊
+## Features
 
-### 1. Cadastro de Conta
-- Campos obrigatórios: **nome**, **telefone**, **saldo inicial**, e **correntista**.
-- Campos gerenciados automaticamente: **ID** e **score_credito**.
-
-### 2. Ativação de Conta Corrente
-- A conta pode ser marcada como **corrente** posteriormente, caso não tenha sido no momento da criação.
-
-### 3. Validação de Saldo Positivo
-- O saldo da conta **nunca pode ser negativo** e deve ser **igual ou maior que zero**.
-
-### 4. Cálculo Automático de Score
-- O sistema calcula automaticamente o **score_credito** com a fórmula: `score_credito = saldo_cc * 0.1`.
-
-### 5. Unicidade de Campos
-- O **telefone** e **ID** de cada cliente devem ser únicos em todo o sistema.
-
-### 6. Desativação de Conta
-- A conta corrente só pode ser desativada (correntista = false) **se o saldo for zero**.
-
-### 7. Exclusão de Conta
-- A conta só pode ser excluída **se a opção de conta corrente estiver desativada** (correntista = false).
-
-### 8. Validação de Campos Obrigatórios
-- Durante a criação ou atualização da conta, todos os campos obrigatórios devem ser validados pelo sistema.
-
-## Funcionalidades Principais 🎯
-
-1. **Cadastro de Clientes**:
-   - Permite o cadastro de clientes com as informações obrigatórias, como nome, telefone, saldo inicial, e se são correntistas.
-
-2. **Cálculo Automático de Score de Crédito**:
-   - O score de crédito é calculado automaticamente a partir do saldo da conta utilizando a fórmula: `score_credito = saldo_cc * 0.1`.
-
-3. **Operações CRUD**:
-   - A primeira aplicação expõe os endpoints REST para permitir as operações **Create**, **Read**, **Update**, e **Delete**.
-
-4. **Ativação e Desativação de Conta Corrente**:
-   - Funcionalidade para ativar ou desativar uma conta como conta corrente, de acordo com a necessidade do cliente.
-
-5. **Validação de Saldo**:
-   - A validação de saldo é crucial para garantir que nenhuma conta possua saldo negativo.
-
-6. **Exclusão de Conta**:
-   - A conta pode ser excluída apenas se a opção de conta corrente estiver previamente desativada.
+- Customer registration domain
+- Java-based backend implementation
+- Spring Boot microservices structure
+- Separate service organization
+- API-focused service structure
+- Storage-focused service structure
+- Banking-domain context
 
 ---
 
-## Pré-Requisitos
-- **Java 21**: É recomendado utilizar o **Java 21** para executar o projeto. Certifique-se de que o JDK 21 esteja instalado e configurado corretamente no seu sistema.
-- **IDE de Preferência**: Utilize uma IDE que dê suporte a projetos Maven, como IntelliJ IDEA, Eclipse ou VS Code. 
-  - Certifique-se de que o plugin do Maven esteja instalado e habilitado na sua IDE.
+## Tech Stack
 
-## Como Executar o Projeto ⚙️
-- Clone o projeto utilizando o comando: **git clone https://github.com/lucaspc6/banco-javer-microservices.git**
-- Após clonar o repositório, entre no diretório do projeto: **cd banco-javer-microservices**
-- Abra o projeto na sua IDE: Importe o projeto na sua IDE preferida (por exemplo, IntelliJ IDEA, Eclipse ou VS Code). Certifique-se de que o projeto tenha o suporte do Maven configurado corretamente.
-- Execute as aplicações: Após abrir o projeto na IDE, localize a classe principal do Spring Boot (geralmente com a anotação @SpringBootApplication) e execute-a como uma aplicação Java. Normalmente, basta clicar com o botão direito do mouse sobre a classe principal e selecionar a opção "Run" ou "Executar".
-- Abra o console do banco de dados H2 acessando a URL: **http://localhost:9993/h2-console**
-- Faça login utilizando as credenciais do banco de dados configuradas no projeto.
-- Você pode visualizar a documentação da API da primeira aplicação clicando no link abaixo: **http://localhost:9993/swagger-ui/index.html**
-- A documentação da segunda aplicação pode ser acessada pelo mesmo link: **http://localhost:9994/swagger-ui/index.html**
+- **Java**
+- **Spring Boot**
+- **Microservices Architecture**
+- **REST-oriented Backend Structure**
+
+---
+
+## Architecture
+
+The repository follows a microservices-oriented structure with separate service directories.
+
+### Service Responsibilities
+
+- `clienteAPI`  
+  Represents the API-facing service responsible for exposing customer-related operations.
+
+- `ClienteStorage`  
+  Represents the storage-focused service responsible for customer data handling responsibilities.
+
+This structure helps separate application concerns and supports a modular backend design.
+
+---
+
+## Project Structure
+
+```text
+spring-boot-bank-customer-microservices/
+├── ClienteStorage/
+├── clienteAPI/
+└── README.md
+```
+
+### Main Directories
+
+- `clienteAPI/`  
+  Contains the API service for customer-related operations.
+
+- `ClienteStorage/`  
+  Contains the storage service responsible for customer data handling.
+
+- `README.md`  
+  Project documentation.
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/lucaspc6/Banco-Javer-Microservices.git
+```
+
+Access the project directory:
+
+```bash
+cd Banco-Javer-Microservices
+```
+
+Each service should be accessed and executed from its respective directory.
+
+Example:
+
+```bash
+cd clienteAPI
+```
+
+or:
+
+```bash
+cd ClienteStorage
+```
+
+---
+
+## Running the Project
+
+Because the repository is organized into separate services, each service should be started individually.
+
+For a standard Spring Boot project, a service can usually be started with Maven using:
+
+```bash
+./mvnw spring-boot:run
+```
+
+or, if Maven is installed globally:
+
+```bash
+mvn spring-boot:run
+```
+
+If the project uses Gradle instead of Maven, use:
+
+```bash
+./gradlew bootRun
+```
+
+> Check each service directory for its specific build configuration before running the commands.
+
+---
+
+## API Endpoints
+
+The repository is organized as a customer registration microservices project, but the available repository view does not expose verified endpoint documentation.
+
+Recommended documentation to add:
+
+```text
+Method | Endpoint | Description
+GET    | /clientes | List customers
+POST   | /clientes | Register a customer
+GET    | /clientes/{id} | Get customer by ID
+PUT    | /clientes/{id} | Update customer
+DELETE | /clientes/{id} | Delete customer
+```
+
+> Add only the endpoints that are actually implemented in the source code.
+
+---
+
+## Environment Variables
+
+No verified environment variable documentation was available in the repository view.
+
+If the services use database connections or service communication settings, document them here.
+
+Example:
+
+```env
+SERVER_PORT=
+SPRING_DATASOURCE_URL=
+SPRING_DATASOURCE_USERNAME=
+SPRING_DATASOURCE_PASSWORD=
+```
+
+> Keep sensitive values out of the repository and use environment-specific configuration files when needed.
+
+---
+
+## Testing
+
+No verified automated test documentation was available in the repository view.
+
+If tests are configured in the services, they can typically be executed with:
+
+```bash
+mvn test
+```
+
+or:
+
+```bash
+./mvnw test
+```
+
+---
+
+## Screenshots
+
+Screenshots are not required for backend services, but API documentation examples can improve the project presentation.
+
+Recommended additions:
+
+- Example request payload
+- Example response payload
+- Service communication diagram
+- API testing screenshots from Postman or Insomnia
+
+---
+
+## Future Improvements
+
+Potential improvements for this project include:
+
+- Add endpoint documentation for each service
+- Add request and response examples
+- Add a microservices architecture diagram
+- Document how `clienteAPI` communicates with `ClienteStorage`
+- Add service-specific setup instructions
+- Add database configuration instructions
+- Add automated tests for customer registration flows
+- Add Docker support for local execution
+- Add a Postman or Insomnia collection
+- Add CI workflow for build and test validation
+
+---
+
+## Author
+
+**Lucas Carvalho**
+
+GitHub: [@lucaspc6](https://github.com/lucaspc6/)
